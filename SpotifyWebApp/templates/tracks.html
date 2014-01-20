@@ -1,0 +1,37 @@
+{% extends 'base-layout.html' %}
+<!DOCTYPE html>
+{% block content %}
+    <div class="container pull-right">
+        <form class="form-search" action="/searchtrack/" method="post">
+            {% csrf_token %}
+            <input type="text" class="input-medium search-query"
+                   name="searchvalue" id="searchvalue" placeholder="Tracks">
+            <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
+
+    {% if tracks %}
+    <div class="container">
+        {% for t in tracks %}
+            <div>
+                <p>
+                <h4><a href="/viewartist/" style="text-decoration: underline">{{ t.name }}</a></h4>
+                </p>
+                <em>
+                    Artist: {{ t.artistName }}
+                </em>
+                <br />
+                <dfn lang="sql">
+                    Album: {{ t.albumName }}
+                </dfn>
+                <p>
+                    <small>Popularity: {{ t.popularity }}</small>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
+{% block footer_content %}
+
+{% endblock %}

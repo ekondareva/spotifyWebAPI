@@ -1,0 +1,32 @@
+{% extends 'base-layout.html' %}
+<!DOCTYPE html>
+{% block content %}
+    <div class="container pull-right">
+        <form class="form-search" action="/searchartist/" method="post">
+            {% csrf_token %}
+            <input type="text" class="input-medium search-query"
+                   name="searchvalue" id="searchvalue" placeholder="Artist">
+            <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
+    {% if artists %}
+    <div class="container">
+        {% for a in artists %}
+            <div>
+                <p>
+                <h4><a href="/viewartist/" style="text-decoration: underline">{{ a.name }}</a></h4>
+                </p>
+                <p class="lead">
+                    <!--{{ a.href }}-->
+                </p>
+                <p>
+                    <small>Popularity: {{ a.popularity }}</small>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
+{% block footer_content %}
+
+{% endblock %}
